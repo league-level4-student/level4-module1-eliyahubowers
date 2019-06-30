@@ -44,7 +44,7 @@ public class CustomArrayListTest {
 		list.add('O');
 		
 		list.insert(2, 'E');
-		
+
 		if(list.get(0) != 'D') fail("list.get(0) returning improper value.");
 		if(list.get(1) != 'I') fail("list.get(1) returning improper value.");
 		if(list.get(2) != 'E') fail("list.get(2) returning improper value.");
