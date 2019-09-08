@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -75,7 +76,7 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 
 	public void startGame() {
 		//1. Save the instructions for the game in the following string variable.
-		String instructions = "";
+		String instructions = "Welcome to the snake game.\nTo move use the arrow keys.\nDon't crash into yourself or the wall.\nSelect a difficulty below.";
 		
 		String[] options = new String[] { "Expert", "Moderate", "Beginner" };
 		int input = JOptionPane.showOptionDialog(null, instructions, "Snake", 0, -1, null, options, 0);
@@ -85,8 +86,26 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		//2. Use a switch statement to determine which difficulty was chosen.
 		//   Use timer.setDelay(delay) with different numbers to change the speed
 		//   of the game. The smaller the number, the faster it goes.
+		switch (choice) {
+		
+		case "Expert":{
+			this.timer.setDelay(1);
+			break;
+		}
+		
+		case "Moderate":{
+			this.timer.setDelay(5);
+			break;
+		}
 
+		case "Beginner":{
+			this.timer.setDelay(10);
+			break;
+		}
+		
+		}
 		//3. start the timer
+		this.timer.start();
 	}
 
 	public static void main(String[] args) {
@@ -103,7 +122,34 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		//1. Use a switch statement on e.getKeyCode()
 		//   to determine which key was pressed.
+		switch (e.getKeyCode()) {
 		
+		case KeyEvent.VK_UP:{
+			this.snake.setDirection(Direction.UP);
+			break;
+		}
+		
+		case KeyEvent.VK_LEFT:{
+			this.snake.setDirection(Direction.LEFT);
+			break;
+		}
+		
+		case KeyEvent.VK_DOWN:{
+			this.snake.setDirection(Direction.DOWN);
+			break;
+		}
+		
+		case KeyEvent.VK_RIGHT:{
+			this.snake.setDirection(Direction.RIGHT);
+			break;
+		}
+		
+		case KeyEvent.VK_SPACE:{
+			this.snake.feed();
+			break;
+		}
+		
+		}
 		// if an arrow key is pressed, set the snake's 
 		// direction accordingly
 		
@@ -112,21 +158,27 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 	}
 
 	private void setFoodLocation() {
-		//1. Create a new Location object that is set to a random location
-		
+		//1. Create a new Location object that is set to a random location	
+		boolean foodCanBeMade = true;
+		Random r = new Random();
+		Location randomLoc = new Location(r.nextInt(10),r.nextInt(10));
+		while(foodCanBeMade = true) {
+		randomLoc = new Location(r.nextInt(10),r.nextInt(10));
 		//2. set the foodLocation variable equal to the Location object you just created.
 		//   use the snake's isLocationOnSnake method to make sure you don't put the food on the snake
-		
+		foodCanBeMade = this.snake.isLocationOnSnake(randomLoc);
+		}
+		this.foodLocation = randomLoc;
 	}
 
 	private void gameOver() {
 		
 		//1. stop the timer
-		
+		this.timer.stop();
 		//2. tell the user their snake is dead
-		
+		JOptionPane.showMessageDialog(null, "Your snake has died :(");
 		//3. ask them if they want to play again.
-		
+		String inputPlayAgain = JOptionPane.showInputDialog("Do you want to play again?? ?");
 		//4. if they want to play again
 		//   reset the snake and the food and start the timer
 		//   else, exit the game
