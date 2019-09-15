@@ -36,18 +36,46 @@ public class Snake {
 	public void update() {
 		//1. use a switch statement to check on the currentDirection
 		//   of the snake and calculate its next x and y position.
+		Location nextXYPos;
+		switch (this.currentDirection) {
 		
-
+		case UP:{
+			nextXYPos = new Location(head.getLocation().x,head.getLocation().y-1);
+			break;
+		}
+		
+		case LEFT:{
+			nextXYPos = new Location(head.getLocation().x-1,head.getLocation().y);
+			break;
+		}
+		
+		case DOWN:{
+			nextXYPos = new Location(head.getLocation().x,head.getLocation().y+1);
+			break;
+		}
+		
+		case RIGHT:{
+			nextXYPos = new Location(head.getLocation().x+1,head.getLocation().y);
+			break;
+		}
+		
+		}
 		//2. Iterate through the SnakeSegments in reverse order
 		//2a. Update each snake segment to the location of the segment 
 		//    in front of it.
-		
+		for(int i = snake.size()-1; i >= 0; i--) {
+			Location currentSegLoc1 = this.snake.get(i).getLocation();
+			Location currentSegLoc2 = this.snake.get(i-1).getLocation();
+			currentSegLoc1.x
+			currentSegLoc1.y
+			this.snake.get(i).setLocation(currentSegLoc1);
+		}
 		
 		//3. set the location of the head to the new location calculated in step 1
 		
 
 		//4. set canMove to true
-		
+		this.canMove = true;
 	}
 
 	public void setDirection(Direction d) {
