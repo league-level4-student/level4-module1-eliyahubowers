@@ -40,7 +40,7 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 
 	public _00_SnakeGame() {
 		snake = new Snake(new Location(WIDTH / 2, HEIGHT / 2));
-
+		setFoodLocation();
 		window = new JFrame("Snake");
 		panel = new JPanel() {
 			private static final long serialVersionUID = 1L;
@@ -69,8 +69,6 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 
-		setFoodLocation();
-
 		startGame();
 	}
 
@@ -89,17 +87,17 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		switch (choice) {
 		
 		case "Expert":{
-			this.timer.setDelay(1);
+			this.timer.setDelay(100);
 			break;
 		}
 		
 		case "Moderate":{
-			this.timer.setDelay(5);
+			this.timer.setDelay(400);
 			break;
 		}
 
 		case "Beginner":{
-			this.timer.setDelay(10);
+			this.timer.setDelay(800);
 			break;
 		}
 		
@@ -144,11 +142,6 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 			break;
 		}
 		
-		case KeyEvent.VK_SPACE:{
-			this.snake.feed();
-			break;
-		}
-		
 		}
 		// if an arrow key is pressed, set the snake's 
 		// direction accordingly
@@ -159,14 +152,14 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 
 	private void setFoodLocation() {
 		//1. Create a new Location object that is set to a random location	
-		boolean foodCanBeMade = true;
+		boolean foodCannotBeMade = true;
 		Random r = new Random();
-		Location randomLoc = new Location(r.nextInt(10),r.nextInt(10));
-		while(foodCanBeMade = true) {
-		randomLoc = new Location(r.nextInt(10),r.nextInt(10));
+		Location randomLoc = new Location(1,1);
+		while(foodCannotBeMade == true) {
+		randomLoc = new Location(r.nextInt(WIDTH),r.nextInt(HEIGHT));
 		//2. set the foodLocation variable equal to the Location object you just created.
 		//   use the snake's isLocationOnSnake method to make sure you don't put the food on the snake
-		foodCanBeMade = this.snake.isLocationOnSnake(randomLoc);
+		foodCannotBeMade = this.snake.isLocationOnSnake(randomLoc);
 		}
 		this.foodLocation = randomLoc;
 	}
@@ -221,7 +214,7 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		}
 		//3. if the location of the head is equal to the location of the food,
 		// 	 feed the snake and set the food location
-		if(this.snake.getHeadLocation() == this.foodLocation) {
+		if(this.snake.getHeadLocation().x == this.foodLocation.x && this.snake.getHeadLocation().y == this.foodLocation.y) {
 			this.snake.feed();
 			setFoodLocation();
 		}
