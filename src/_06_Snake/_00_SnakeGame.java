@@ -87,17 +87,17 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		switch (choice) {
 		
 		case "Expert":{
-			this.timer.setDelay(100);
+			this.timer.setDelay(60);
 			break;
 		}
 		
 		case "Moderate":{
-			this.timer.setDelay(400);
+			this.timer.setDelay(150);
 			break;
 		}
 
 		case "Beginner":{
-			this.timer.setDelay(800);
+			this.timer.setDelay(300);
 			break;
 		}
 		

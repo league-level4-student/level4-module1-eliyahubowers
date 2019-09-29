@@ -99,7 +99,7 @@ public class Snake {
 	public boolean isOutOfBounds() {
 		//1. complete the method so it returns true if the head of the snake is outside of the window
 		//   and false otherwise
-		if(this.snake.get(0).getLocation().x < 0 || this.snake.get(0).getLocation().y < 0 || this.snake.get(0).getLocation().x > 15 || this.snake.get(0).getLocation().y > 12) {
+		if(this.snake.get(0).getLocation().x < 0 || this.snake.get(0).getLocation().y < 0 || this.snake.get(0).getLocation().x > 14 || this.snake.get(0).getLocation().y > 11) {
 			return true;
 		}
 		return false;
